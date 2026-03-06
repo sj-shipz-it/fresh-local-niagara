@@ -27,6 +27,7 @@ export const cities: string[] = [
   'Pelham',
   'Fenwick',
   'Fort Erie',
+  'Ridgeway',
   'Ridgeville',
   'Lincoln',
   'St. Davids',

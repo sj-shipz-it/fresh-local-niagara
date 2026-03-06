@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Purveyor, LocalComment } from '../types';
+import { Purveyor, LocalComment, ListingImprovement } from '../types';
 import { categories } from '../data/categories';
-import { getCommentsForPurveyor, saveComment } from '../utils/storage';
+import { getCommentsForPurveyor, saveComment, saveImprovement } from '../utils/storage';
 import StarRating from './StarRating';
 
 interface PurveyorModalProps {
@@ -20,6 +20,14 @@ export default function PurveyorModal({ purveyor, onClose }: PurveyorModalProps)
   const [showCommentForm, setShowCommentForm] = useState(false);
   const [commentName, setCommentName] = useState('');
   const [commentText, setCommentText] = useState('');
+
+  // Improve listing state
+  const [showImproveForm, setShowImproveForm] = useState(false);
+  const [improveName, setImproveName] = useState('');
+  const [improveField, setImproveField] = useState('address');
+  const [improveValue, setImproveValue] = useState('');
+  const [improveSent, setImproveSent] = useState(false);
+
 
   const category = categories.find((c) => c.id === purveyor.category);
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(purveyor.address)}`;
@@ -44,6 +52,35 @@ export default function PurveyorModal({ purveyor, onClose }: PurveyorModalProps)
       document.body.style.overflow = '';
     };
   }, [handleKeyDown]);
+
+  const fieldLabels: Record<string, string> = {
+    address: purveyor.address,
+    phone: purveyor.phone,
+    website: purveyor.website,
+    hours: purveyor.hours,
+    name: purveyor.name,
+    other: '',
+  };
+
+  const handleSubmitImprovement = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!improveName.trim() || !improveValue.trim()) return;
+    const improvement: ListingImprovement = {
+      purveyorId: purveyor.id,
+      purveyorName: purveyor.name,
+      field: improveField,
+      currentValue: fieldLabels[improveField] ?? '',
+      suggestedValue: improveValue.trim(),
+      submitterName: improveName.trim(),
+      date: new Date().toISOString(),
+    };
+    saveImprovement(improvement);
+    setImproveSent(true);
+    setShowImproveForm(false);
+    setImproveName('');
+    setImproveValue('');
+    setImproveField('address');
+  };
 
   const handleSubmitComment = (e: React.FormEvent) => {
     e.preventDefault();
@@ -177,6 +214,87 @@ export default function PurveyorModal({ purveyor, onClose }: PurveyorModalProps)
             <img src="https://www.gstatic.com/images/branding/product/1x/googleg_48dp.png" alt="" className="w-4 h-4" />
             View Google Reviews
           </a>
+
+          {/* ─── Improve This Listing (unverified only) ─── */}
+          {purveyor.verified === false && (
+            <div className="border border-amber-200 bg-amber-50 rounded-xl p-4">
+              <div className="flex items-start gap-3">
+                <svg className="w-5 h-5 text-amber-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+                </svg>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-semibold text-amber-800">Listing details unverified</p>
+                  <p className="text-xs text-amber-700 mt-0.5">Some contact details for this listing haven't been fully verified. Know something that's out of date?</p>
+                  {improveSent && (
+                    <p className="mt-2 text-xs font-medium text-brand-green">Thanks! Your suggestion has been saved for review.</p>
+                  )}
+                  {!improveSent && !showImproveForm && (
+                    <button
+                      onClick={() => setShowImproveForm(true)}
+                      className="mt-2 text-xs font-semibold text-amber-800 underline underline-offset-2 hover:text-amber-900 transition-colors"
+                    >
+                      Suggest a correction →
+                    </button>
+                  )}
+                  {showImproveForm && (
+                    <form onSubmit={handleSubmitImprovement} className="mt-3 space-y-2.5">
+                      <div>
+                        <label className="block text-xs font-medium text-amber-800 mb-1">Your name</label>
+                        <input
+                          type="text"
+                          value={improveName}
+                          onChange={(e) => setImproveName(e.target.value)}
+                          className="w-full px-2.5 py-1.5 rounded-lg border border-amber-200 bg-white text-sm text-brand-brown focus:outline-none focus:ring-2 focus:ring-amber-300"
+                          required
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-medium text-amber-800 mb-1">What needs correcting?</label>
+                        <select
+                          value={improveField}
+                          onChange={(e) => setImproveField(e.target.value)}
+                          className="w-full px-2.5 py-1.5 rounded-lg border border-amber-200 bg-white text-sm text-brand-brown focus:outline-none focus:ring-2 focus:ring-amber-300"
+                        >
+                          <option value="address">Address</option>
+                          <option value="phone">Phone number</option>
+                          <option value="website">Website</option>
+                          <option value="hours">Hours</option>
+                          <option value="name">Business name</option>
+                          <option value="other">Other</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-xs font-medium text-amber-800 mb-1">Correct information</label>
+                        <input
+                          type="text"
+                          value={improveValue}
+                          onChange={(e) => setImproveValue(e.target.value)}
+                          placeholder="Enter the correct value..."
+                          className="w-full px-2.5 py-1.5 rounded-lg border border-amber-200 bg-white text-sm text-brand-brown placeholder:text-brand-brown-light/50 focus:outline-none focus:ring-2 focus:ring-amber-300"
+                          required
+                        />
+                      </div>
+                      <div className="flex gap-2">
+                        <button
+                          type="submit"
+                          className="px-3 py-1.5 bg-amber-500 text-white text-xs font-semibold rounded-lg hover:bg-amber-600 transition-colors"
+                        >
+                          Submit
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setShowImproveForm(false)}
+                          className="px-3 py-1.5 text-xs font-medium text-amber-700 hover:text-amber-900 transition-colors"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </form>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* ─── Local Commentary ─── */}
           <div className="border-t border-brand-border pt-5">

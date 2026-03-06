@@ -4,15 +4,70 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Fresh Local Niagara — Discover 45+ local food purveyors across the Niagara Region, Ontario. Farm stands, cheese, butchers, bakeries, orchards, and more." />
-    <meta name="keywords" content="Niagara food, local food, farm stand, cheese, butcher, bakery, orchard, maple syrup, honey, Niagara Region" />
-    <meta property="og:title" content="Fresh Local Niagara — Local Food Directory" />
-    <meta property="og:description" content="Discover local food purveyors across the Niagara Region, Ontario." />
+
+    <!-- Primary SEO -->
+    <title>Fresh Local Niagara — Local Food Directory | Niagara Region, Ontario</title>
+    <meta name="description" content="Discover 59 local food purveyors across the Niagara Region, Ontario. Farm stands, artisan cheese, butchers, bakeries, orchards, maple syrup, honey, and specialty food — all in one place." />
+    <meta name="keywords" content="Niagara local food, farm stands Niagara, Niagara-on-the-Lake food, Niagara farmers market, Niagara cheese, local butcher Niagara, Niagara bakery, u-pick Niagara, Niagara Region food directory, Ontario local food" />
+    <meta name="author" content="Fresh Local Niagara" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://freshlocalniagara.ca/" />
+
+    <!-- Open Graph (Facebook, iMessage, WhatsApp previews) -->
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://freshlocalniagara.ca/" />
+    <meta property="og:title" content="Fresh Local Niagara — Local Food Directory" />
+    <meta property="og:description" content="Discover 59 local food purveyors across the Niagara Region — farm stands, cheese, butchers, bakeries, orchards, maple syrup, markets, and more." />
+    <meta property="og:site_name" content="Fresh Local Niagara" />
+    <meta property="og:locale" content="en_CA" />
+
+    <!-- Twitter / X Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Fresh Local Niagara — Local Food Directory" />
+    <meta name="twitter:description" content="Discover 59 local food purveyors across the Niagara Region, Ontario." />
+
+    <!-- Geo targeting -->
+    <meta name="geo.region" content="CA-ON" />
+    <meta name="geo.placename" content="Niagara Region, Ontario, Canada" />
+    <meta name="geo.position" content="43.15;-79.25" />
+    <meta name="ICBM" content="43.15, -79.25" />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Fresh Local Niagara",
+      "url": "https://freshlocalniagara.ca",
+      "description": "A directory of local food purveyors across the Niagara Region, Ontario, Canada — farm stands, artisan cheese, butchers, bakeries, orchards, and more.",
+      "inLanguage": "en-CA",
+      "areaServed": {
+        "@type": "AdministrativeArea",
+        "name": "Niagara Region",
+        "containedInPlace": {
+          "@type": "State",
+          "name": "Ontario",
+          "containedInPlace": {
+            "@type": "Country",
+            "name": "Canada"
+          }
+        }
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://freshlocalniagara.ca/?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    <title>Fresh Local Niagara — Local Food Directory</title>
   </head>
   <body>
     <div id="root"></div>

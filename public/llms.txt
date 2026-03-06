@@ -1,0 +1,32 @@
+# Fresh Local Niagara
+
+> A community-built directory of local food purveyors across the Niagara Region, Ontario, Canada.
+
+Fresh Local Niagara helps residents and visitors discover where to buy directly from local farmers, artisans, and producers in the Niagara Peninsula — from Jordan Station and Grimsby in the west to Niagara-on-the-Lake and Fort Erie in the east.
+
+## What we list
+
+- **Farm Stands** — seasonal roadside markets, fresh produce direct from farms
+- **Artisan Cheese** — local cheesemakers and specialty cheese shops
+- **Butchers & Meats** — local butchers, natural/hormone-free meat producers, charcuterie
+- **Bakeries** — artisan bread, sourdough, pastries, pies
+- **Orchards & U-Pick** — apples, peaches, cherries, strawberries, pumpkins
+- **Maple & Honey** — local maple syrup producers, apiaries, mead
+- **Specialty Food** — farm breweries, wineries, lavender farms, gourmet food shops
+- **Markets** — farmers markets, year-round food halls
+
+## Coverage area
+
+The Niagara Region, Ontario, Canada — including Grimsby, Beamsville, Jordan, Vineland, St. Catharines, Niagara Falls, Niagara-on-the-Lake, Welland, Pelham, Fonthill, Fenwick, and surrounding communities.
+
+## Data
+
+Each listing includes name, category, city, address, phone, website, hours, and geolocation (latitude/longitude). Listings are community-maintained — business owners can claim their listing to add photos and custom information.
+
+## About
+
+Built to support the local food economy in Niagara. Not affiliated with any government or tourism body. Run by a local Niagara resident who believes in knowing where your food comes from.
+
+## Contact
+
+Website: https://freshlocalniagara.ca

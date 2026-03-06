@@ -15,6 +15,7 @@ export interface Purveyor {
   reviewCount: number;
   featured: boolean;
   googleMapsUrl?: string; // Direct link to Google Maps listing / reviews
+  verified?: boolean; // false = flagged for review; omit when unset
 }
 
 export type CategoryId =
@@ -43,6 +44,26 @@ export interface LocalComment {
   comment: string;
   date: string;
   name: string;
+}
+
+export interface ListingImprovement {
+  purveyorId: number;
+  purveyorName: string;
+  field: string;
+  currentValue: string;
+  suggestedValue: string;
+  submitterName: string;
+  date: string;
+}
+
+export interface ListingClaim {
+  purveyorId: number;
+  purveyorName: string;
+  ownerName: string;
+  ownerRole: string;
+  email: string;
+  date: string;
+  status: 'pending';
 }
 
 export interface UserLocation {
