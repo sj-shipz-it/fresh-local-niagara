@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "Dev Server",
+      "runtimeExecutable": "/Users/selinajeckersall/Documents/fresh-local-niagara/node_modules/.bin/vite",
+      "runtimeArgs": ["--port", "5174"],
+      "port": 5174
+    },
+    {
+      "name": "Preview (built)",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "preview"],
+      "port": 4173
+    }
+  ]
+}
